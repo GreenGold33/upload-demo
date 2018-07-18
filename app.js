@@ -32,11 +32,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // -- cloudinary
 
-// cloudinary.config({
-//   cloud_name: 'ironhack-bcn', // process.env.CLOUDINARY_NAME,
-//   api_key: '544917682468444', // process.env.CLOUDINARY_KEY,
-//   api_secret: 'vhIDJKW9j8OTUUz2tRWasQOUKjU' // process.env.CLOUDINARY_SECRET
-// });
+cloudinary.config({
+  cloud_name: 'ironhack-bcn', // process.env.CLOUDINARY_NAME,
+  api_key: '544917682468444', // process.env.CLOUDINARY_KEY,
+  api_secret: 'vhIDJKW9j8OTUUz2tRWasQOUKjU' // process.env.CLOUDINARY_SECRET
+});
 
 // -- routes
 

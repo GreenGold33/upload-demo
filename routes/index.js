@@ -7,14 +7,20 @@ const upload = require('../middlewares/upload');
 const Product = require('../models/product');
 
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
+  Product.find()
+    .then((result) => {
+      const data = {
+        products: result
+      };
+      res.render('index', data);
+    });
 });
 
 router.post('/upload', upload.single('photo'), (req, res, next) => {
   const { name, price } = req.body;
-  const fileUrl = req.file.url;
+  const imgUrl = req.file.url;
   // const imgName = req.file.originalname;
-  const data = { name, price, fileUrl };
+  const data = { name, price, imgUrl };
   const newMovie = new Product(data);
   newMovie.save()
     .then(() => {

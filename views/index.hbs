@@ -1,0 +1,35 @@
+<section>
+  <h2>Create a product</h2>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <div class="field">
+      <label>name</label>
+      <input type="text" name="name" />
+    </div>
+    <div class="field">
+      <label>price</label>
+      <input type="number" name="price" />
+    </div>
+    <div class="field">
+      <label>photo</label>
+      <input type="file" name="photo" />
+    </div>
+    <div class="field">
+      <input type="submit" value="Save" />
+    </div>
+  </form>
+</section>
+
+
+<section>
+  <h2>Products</h2>
+  {{#unless products}}
+    <p>No products yet</p>
+  {{/unless}}
+  {{#each products}}
+  <div class="card">
+    <h3>{{ this.name }}</h3>
+    <p>EUR {{ this.price }}</p>
+    <img src="{{ this.fileUrl }}" alt="Picture of {{ this.name }}" />
+  {{/each}}
+  </div>
+</section>

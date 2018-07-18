@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -14,7 +15,7 @@ const app = express();
 // -- database
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/upload-demo', {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
@@ -29,13 +30,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// console.log(process.env.MONGODB_URL);
 
 // -- cloudinary
 
 cloudinary.config({
-  cloud_name: 'ironhack-bcn', // process.env.CLOUDINARY_NAME,
-  api_key: '544917682468444', // process.env.CLOUDINARY_KEY,
-  api_secret: 'vhIDJKW9j8OTUUz2tRWasQOUKjU' // process.env.CLOUDINARY_SECRET
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET
 });
 
 // -- routes

@@ -18,8 +18,11 @@ router.get('/', (req, res, next) => {
 
 router.post('/upload', upload.single('photo'), (req, res, next) => {
   const { name, price } = req.body;
+  if (!req.file) {
+    res.redirect('/validation-error');
+    return;
+  }
   const imgUrl = req.file.url;
-  // const imgName = req.file.originalname;
   const data = { name, price, imgUrl };
   const newMovie = new Product(data);
   newMovie.save()
